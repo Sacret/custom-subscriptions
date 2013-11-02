@@ -1,0 +1,7 @@
+; $Id$
+name = "Custom Subscriptions"
+description = "Alows users to follow content"
+core = 7.x
+version = 7.x-1.0
+php = 5.1
+scripts[] = custom_subscriptions.js

@@ -1,0 +1,45 @@
+<?php
+
+/*
+ Implements hook_menu()
+*/
+function custom_subscriptions_menu() { 
+  $items = array();   
+  $items['custom_subscriptions_ajax'] = array(
+    'title' => 'Ajax callback', 
+    'page callback' => 'custom_subscriptions_ajax',
+    'access callback' => TRUE, 
+    'type' => MENU_CALLBACK, 
+  ); 
+  return $items;
+}
+
+/**
+ * Implements ajax callback function
+ */
+function custom_subscriptions_ajax() {
+  global $user;   
+  if($_POST['type'] == 'follow') {
+    if ($_POST['nid']) {      
+      db_insert('custom_subscriptions')
+        ->fields(array(
+          'uid' => $user->uid,
+          'nid' => $_POST['nid'],
+        ))
+        ->execute();
+      print(1); 
+    } 
+  }
+  else if($_POST['type'] == 'unfollow') {
+    if ($_POST['nid']) {
+      db_delete('custom_subscriptions')  
+        ->condition('uid', $user->uid)
+        ->condition('nid', $_POST['nid'])
+        ->execute();      
+      print(1); 
+    } 
+  }
+  else {
+    print(0);
+  }
+}

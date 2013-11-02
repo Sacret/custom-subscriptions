@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_schema() 
+ */
+function custom_subscriptions_schema() {
+  $schema['custom_subscriptions'] = array(
+    'description' => t('The base table for subscriptions'),
+    'fields' => array(  
+      'sid' => array(  
+        'type' => 'serial',  
+        'unsigned' => TRUE,  
+        'not null' => TRUE,
+      ),       
+      'uid' => array(  
+        'type' => 'int',  
+        'length' => 10,        
+        'not null' => TRUE,
+      ),  
+      'nid' => array(  
+        'type' => 'int',  
+        'length' => 10,        
+        'not null' => TRUE,
+      ),   
+    ),  
+   'primary key' => array('sid'), 
+  ); 
+  return $schema;
+}
